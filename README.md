@@ -9,3 +9,9 @@ a rep to keep track on learning step
 
 ## java
 最后，我们需要学习一点java，毕竟是吃饭的家伙。
+
+## shell
+
+根据pid查找对应的启动路径
+
+​	pwdx pid
