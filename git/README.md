@@ -33,6 +33,16 @@ git pull origin master: 相当于直接合并
 
 
 
+
+
+### git拉取远程某个分支到本地的某个分支
+
+git fetch origin release_v1.6.2 release_v1.6.2
+
+git push origin release_v1.5.2:release_v1.5.2
+
+
+
 ## git squash 和 rebase的区别
 
 
@@ -58,6 +68,14 @@ rebase有两个作用
 * 如果是你的分支里，有别人也在开发的内容，需要拉取别人的分支，记得在当前分支上新建一个test分支，在test分支里面，拉取别人的分支(比如你需要一些前端的代码)，测试，修改自己原本的分支，在test分支里面rebase原本的分支，这样可以保证git提交的内容不冲突，同时开发没问题，同时git log里的message也是没有问题的，干净的。
 
 
+
+## git里的remote命令
+remote只是代名词而已，可以理解成为本地的仓库连接上一些远程的仓库，具体为：git remote -v
+
+* origin是clone下来后，就会自带的一个仓库，这个代表你clone下来的原始仓库，你要有权限才能向这个仓库里提交代码
+* upstream，默认命名的仓库，代表你自己fork的仓库的原始仓库，这样就可以提pr等操作了
+新增upstream的操作 git remote add upstream giturl.git
+https://www.cnblogs.com/wuer888/p/7655856.html
 
 ##  git的基本开发流程
 
@@ -96,6 +114,23 @@ rebase有两个作用
 
 以上都会导致你的pr里面，会有额外的内容，很难看，解决方法就是需要先拉取upstream的代码到本地，然后在branch里rebase一下拉取的最新的master的内容，这样再次提交就会把分支的根移动到最新的代码下，不会有额外的内容
 
+-------
+
+
+
+git里配置ssh(或者其他类似的代码仓库)
+
+​	怎么认证你是你自己？使用ssh，不对称加密，代码仓库保留公约，你保留私钥，链接的时候，你把你的私钥发送给对面即可。
+
+​	密钥对一般成对生成。要么在代码库里生成，然后吧你的私钥下载下来，拷贝到你的当前用户的.ssh文件夹下面，重命名为id_isa，这样就能完成认证；要么就在本地生成，然后把生成的公钥上传到代码库里，这样也是可以的
+
+* 要注意私钥密码的权限问题，不能太大，600，否则会有bad permission
+* 如果已经有了别的私钥，需要百度一下怎么在本地报错多个密钥
+
+---
+
+
+
 
 
 github的完整的工作流程
@@ -117,3 +152,96 @@ github的完整的工作流程
             数据库类型的压测：tpc、tco
     6.快速沟通
         Slack
+
+
+
+
+
+-----
+
+
+
+
+
+git 撤销commit相关的内容
+
+如果一个内容你已经commit了，然后现在想撤销commit，这个时候就分好几种情况
+
+* 只想修改commit的信息  git commit --amend
+
+* 1，撤销这个提交，但是不撤销add,这样你这个commit修改的内容都在,同时也有这个add的内容,可以继续修改,然后继续commit,也可以直接commit(类似修改commit信息,只不过如果只是想修改commit的信息的话，也有别的单独的命令)。 git reset --soft HEAD~2,   HEAD~1也可以写成HEAD^
+* 2.撤销这个提交，保留内容，但是不保留add的信息,这样你可以再次add git reset --mixed HEAD~N
+* 3.撤销这个提交,不保留内容,  git reset --hard HEAD~2,这样所有的内容都被还原到上次commit的内容了
+
+
+
+
+
+
+
+----
+
+git 查看所有的操作日志
+
+git log --pretty=oneline
+
+
+
+git 当前版本叫做HEAD, 上一个版本叫做 HEAD^, 两个叫做HEAD^^, 前一百个叫做 HEAD~100
+
+---
+
+git 的reset的log，可以让你知道git的reset的日志
+
+Git reflog
+
+
+
+
+
+---
+
+git diff  查看工作区和暂存区的差异
+
+
+
+git diff --cached 查看暂存区和仓库的差异
+
+dit diff HEAD 查看工作区和仓库的差异
+
+git add  -- git checkout
+
+git commit -- git reset HEAD^
+
+
+
+
+
+
+
+----
+
+git工具
+
+1.github desktop
+
+2.source tree
+
+
+
+
+
+
+
+
+
+----
+
+
+
+git stash pop 后想恢复
+
+
+
+git fsck
+
