@@ -98,4 +98,13 @@ https://github.com/jakesgordon/javascript-state-machine
 
 1.raft的英文论文：https://raft.github.io/raft.pdf
 
+raft的中文翻译论文：https://blog.csdn.net/baijiwei/article/details/78759364
+
 2.raft的mit的学生指引：https://thesquareplanet.com/blog/students-guide-to-raft/
+
+3.raft的etcd的代码介绍：https://www.cnblogs.com/myd620/p/13189604.html
+
+4.segment fault里的golang的代码实现：https://segmentfault.com/a/1190000021801938
+
+5.知乎的介绍：https://zhuanlan.zhihu.com/p/91288179
+
